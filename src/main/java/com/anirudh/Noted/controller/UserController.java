@@ -21,7 +21,7 @@ public class UserController {
 		
 		return userService.saveUser(user);
 		
-		s
+		
 	}
 	
 	@PostMapping("/login")
@@ -31,7 +31,7 @@ public class UserController {
 				.authenticate(new UserNamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 		
 		if (authentication.isAuthenticated()) 
-			return jwtService.generateToken(user.email());
+			return jwtService.generateToken(user.getEmail());
 		else 
 			return "bad credentials";
 		
