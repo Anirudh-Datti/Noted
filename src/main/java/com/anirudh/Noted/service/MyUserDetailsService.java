@@ -2,6 +2,7 @@ package com.anirudh.Noted.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.anirudh.Noted.repo.UserRepo;
 import com.anirudh.Noted.model.User;
+import com.anirudh.Noted.model.UserPrincipal;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
@@ -18,15 +20,15 @@ public class MyUserDetailsService implements UserDetailsService {
 	
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-	User user= repo.findByUsername(email);
+	User user= repo.findByUserName(username);
 	
 	if (user==null) {
 		System.out.println("User 404");
 		throw new UsernameNotFoundException("User 404");
 	}
-		 return User;
+		 return new UserPrincipal(user);
 	}
 
 }
